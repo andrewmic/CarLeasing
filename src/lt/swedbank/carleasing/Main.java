@@ -2,7 +2,6 @@ package lt.swedbank.carleasing;
 
 public class Main {
 
-
     static final double AGREEMENT_FEE = 150d;
 
     public static void main(String[] args) {
@@ -10,33 +9,30 @@ public class Main {
         double carPrice;
         double downPaymentSize;
         double downPayment = 0d;
-        double loanSize = 0d;
-        boolean isHasZero = true;
-        boolean isHasNegative = true;
-        boolean isHasTruePaymentDownValid = true;
+        double loanSize;
 
         try {
             carPrice = Double.parseDouble(args[0]);
         } catch (Exception e) {
-            System.out.println("Exception! Not a number: carPrice" );
+            System.out.println("Exception! Not a number: carPrice");
             return;
         }
 
         try {
             downPaymentSize = Integer.parseInt(args[1]);
         } catch (Exception e) {
-            System.out.println("Exception! Not a number: downPaymentSize" );
+            System.out.println("Exception! Not a number: downPaymentSize");
             return;
         }
 
-        if (!isValueNegativeCarPrice(carPrice, isHasZero))
+        if (isValueNegativeCarPrice(carPrice))
             System.out.println("car price: it cannot be negative");
 
-        if (!isValueZeroCarPrice(carPrice, isHasNegative))
+        if (isValueZeroCarPrice(carPrice))
             System.out.println("car price: it cannot be zero");
 
-        if (isHasNegative && isHasNegative) {
-            if (isDownPaymentValid(downPayment, isHasTruePaymentDownValid)) {
+        if (!isValueNegativeCarPrice(carPrice) && !isValueZeroCarPrice(carPrice)) {
+            if (!isDownPaymentValid(downPayment)) {
                 System.out.println("Leasing parameters are valid");
 
                 //System.out.println(String.valueOf(args[0]) + " " + String.valueOf(args[1]));
@@ -68,25 +64,22 @@ public class Main {
         return CarPrice - downPayment;
     }
 
-    public static boolean isValueNegativeCarPrice(double carPrice, boolean isHas) {
+    public static boolean isValueNegativeCarPrice(double carPrice) {
 
-        if (carPrice < 0)
-            isHas = false;
-        return isHas;
+        return (carPrice < 0);
+
     }
 
-    public static boolean isValueZeroCarPrice(double carPrice, boolean isHas) {
+    public static boolean isValueZeroCarPrice(double carPrice) {
 
-        if (carPrice == 0)
-            isHas = false;
-        return isHas;
+        return (carPrice == 0);
+
     }
 
-    public static boolean isDownPaymentValid(double downPayment, boolean isHas) {
+    public static boolean isDownPaymentValid(double downPayment) {
 
-        if (downPayment > 0 && downPayment < 100)
-            isHas = false;
-        return isHas;
+        return (downPayment > 0 && downPayment < 100);
+
     }
 
 }
