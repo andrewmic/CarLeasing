@@ -52,7 +52,7 @@ public class Main {
                 System.out.println("Initial installment: " + (downPayment + AGREEMENT_FEE) + " EUR");
 
             } else {
-                System.out.println("Down payment size 100 is invalid: it must be between 0 and 100" +
+                System.out.println("Down payment size 100 is invalid: it must be between 0 and 100 " +
                         "Leasing parameters are invalid");
             }
         }
